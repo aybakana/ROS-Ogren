@@ -16,3 +16,12 @@ Launch klasöründe bulunan klasörler:
 5- /kobuki -> kobuki robotu ile ilgili launch dosyalarını içerir.
 
 6- /move_base -> move_base paketindeki launch dosyalarını içerir.
+
+Rosbag Filter:
+
+#Removes all tfs except the one that has 'base_footprint' as child frame id
+rosbag filter old.bag new.bag "topic != '/tf' or (len(m.transforms)>0 and m.transforms[0].child_frame_id=='base_footprint')"
+
+#Same as above but limiting other topics to '/odom' and '/scan'
+rosbag filter old.bag new.bag "topic == '/odom' or topic == '/scan' or (topic == '/tf' and len(m.transforms)>0 and m.transforms[0].child_frame_id=='imu_link')"
+
