@@ -20,8 +20,11 @@ Launch klasöründe bulunan klasörler:
 Rosbag Filter:
 
 #Removes all tfs except the one that has 'base_footprint' as child frame id
+#Child Frame Id'si base_footprint olmayan tf'leri kaldırır.
+
 rosbag filter old.bag new.bag "topic != '/tf' or (len(m.transforms)>0 and m.transforms[0].child_frame_id=='base_footprint')"
 
 #Same as above but limiting other topics to '/odom' and '/scan'
+
 rosbag filter old.bag new.bag "topic == '/odom' or topic == '/scan' or (topic == '/tf' and len(m.transforms)>0 and m.transforms[0].child_frame_id=='imu_link')"
 
